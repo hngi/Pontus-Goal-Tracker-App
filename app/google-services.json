@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "861935764140",
+    "firebase_url": "https://pontusgoaltracker.firebaseio.com",
+    "project_id": "pontusgoaltracker",
+    "storage_bucket": "pontusgoaltracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861935764140:android:a5cb0fd6f14e681451d509",
+        "android_client_info": {
+          "package_name": "com.project.pontusgoaltracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861935764140-t5ektuh3dfcqcm7vel17t5josatlnhfd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.pontusgoaltracker",
+            "certificate_hash": "3b04d311a89b0be7ca5071bded6e334cee2eeca6"
+          }
+        },
+        {
+          "client_id": "861935764140-fn55asnld3gmpj3nehel0nf1b7488m48.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGDXjYhXopa7CwQcGrhgzp2Lzds7kzbSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861935764140-fn55asnld3gmpj3nehel0nf1b7488m48.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
