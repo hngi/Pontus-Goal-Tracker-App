@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">PontusGoalTracker</string>
+    <string name="title_activity_sign_up">SignUp</string>
+    <string name="background">background</string>
+    <string name="register">Register</string>
+    <string name="name">Username</string>
+    <string name="email_address">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="social_login">Social Login</string>
+    <string name="already_">Already have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="title_activity_sign_in">SignIn</string>
+    <string name="login">Login</string>
+    <string name="new_user">New User?</string>
+    <string name="icon">icon</string>
 </resources>
