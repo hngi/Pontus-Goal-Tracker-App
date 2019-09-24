@@ -48,6 +48,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         //Initialize all views by ID
         mAuth = FirebaseAuth.getInstance();
         EmailET = findViewById(R.id.email);
@@ -72,6 +73,15 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         linked.setOnClickListener(this);
         facebook.setOnClickListener(this);
 
+
+        sign_up = findViewById(R.id.signup);
+        sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignIn.this, SignUp.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
