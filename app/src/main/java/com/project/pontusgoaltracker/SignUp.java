@@ -49,7 +49,7 @@ public class SignUp extends AppCompatActivity {
         email_up = findViewById(R.id.email);
         user_name = findViewById(R.id.name);
         pass_word = findViewById(R.id.password);
-        sign_in = findViewById(R.id.sign);
+        sign_in = findViewById(R.id.signin);
         progress_bar = findViewById(R.id.progress_up);
         btn = findViewById(R.id.button);
 

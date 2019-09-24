@@ -24,7 +24,7 @@ public class SignIn extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        sign_up = findViewById(R.id.sign);
+        sign_up = findViewById(R.id.signup);
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
