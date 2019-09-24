@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,6 +26,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     Button button;
     TextView signUP;
     ImageView google, linked, facebook;
+
+import android.widget.TextView;
+
+public class SignIn extends AppCompatActivity {
+    TextView sign_up;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,14 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         facebook.setOnClickListener(this);
 
 
+        sign_up = findViewById(R.id.sign);
+        sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignIn.this, SignUp.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
