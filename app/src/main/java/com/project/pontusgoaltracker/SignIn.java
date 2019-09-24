@@ -55,7 +55,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         PwdET = findViewById(R.id.password);
         remember = findViewById(R.id.checkBox);
         button = findViewById(R.id.button);
-        signUP = findViewById(R.id.sign);
+        signUP = findViewById(R.id.signup);
         google = findViewById(R.id.google);
         linked = findViewById(R.id.ln);
         facebook = findViewById(R.id.fb);
@@ -74,8 +74,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         facebook.setOnClickListener(this);
 
 
-        sign_up = findViewById(R.id.signup);
-        sign_up.setOnClickListener(new View.OnClickListener() {
+        signUP = findViewById(R.id.signup);
+        signUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignIn.this, SignUp.class);
@@ -135,7 +135,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
 
                 break;
-            case R.id.sign:
+            case R.id.signup:
                 Intent i = new Intent(SignIn.this, SignUp.class);
                 startActivity(i);
 
