@@ -5,7 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/splashscreen"
+    android:background="@drawable/rectangle"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/goalslogo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/goals"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/smashandset"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"/>
 
 </LinearLayout>
