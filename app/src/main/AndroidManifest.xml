@@ -9,12 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AppSettings"></activity>
+        <activity android:name=".TeamDetails" />
+        <activity android:name=".NewGoals" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".GoalDetailsActivity" />
+        <activity
+            android:name=".GoalListActivity"
+            android:label="@string/title_activity_goal_list"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignIn"
             android:label="@string/title_activity_sign_in"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.pontusgoaltracker.MainActivity" />
@@ -24,7 +32,6 @@
             android:label="@string/title_activity_sign_up"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.project.pontusgoaltracker.MainActivity" />
