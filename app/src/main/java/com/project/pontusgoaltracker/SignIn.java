@@ -120,6 +120,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
                             //if login is successful
                             if (!task.isSuccessful()) {
+                                progressBar.setVisibility(View.GONE);
+
                                 Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             } else {
                                 progressBar.setVisibility(View.GONE);
