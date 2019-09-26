@@ -33,6 +33,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:elevation="4dp"
+            android:background="@android:color/white"
             app:cardCornerRadius="13dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +42,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
 
                 <EditText
                     android:id="@+id/email"
@@ -52,6 +54,7 @@
                     android:layout_marginEnd="16dp"
                     android:ems="10"
                     android:hint="@string/email_address"
+                    android:textColor="@android:color/black"
                     android:inputType="textEmailAddress"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -82,6 +85,7 @@
                     android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:hint="@string/password"
+                    android:textColor="@android:color/black"
                     android:inputType="textPassword"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/remember_me"
+            android:textColor="@android:color/black"
             app:layout_constraintStart_toStartOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
