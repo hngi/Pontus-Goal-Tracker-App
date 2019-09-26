@@ -17,4 +17,11 @@
     <string name="new_user">New User?</string>
     <string name="icon">icon</string>
     <string name="title_activity_goal_list">GoalListActivity</string>
+    <string name="add_new_goal">Add New Goal</string>
+    <string name="goal_detail">Goal Detail</string>
+    <string name="choose_date">Choose Date</string>
+    <string name="settings">Settings</string>
+    <string name="confirm">confirm</string>
+    <string name="add_task">Add task +</string>
+    <string name="checkedtextview">CheckedTextView</string>
 </resources>
