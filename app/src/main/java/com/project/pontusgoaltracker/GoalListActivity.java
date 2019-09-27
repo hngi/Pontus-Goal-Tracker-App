@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,7 +58,10 @@ public class GoalListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_goal_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Goals List");
 
+        ProgressBar progressBar3 = findViewById(R.id.progressBar3);
+        progressBar3.setVisibility(View.VISIBLE);
         userGoals = new ArrayList<>();
         goalRecyclerView = findViewById(R.id.goal_list_recycler);
         goalRecyclerView.setLayoutManager(new LinearLayoutManager(GoalListActivity.this));
@@ -81,6 +85,7 @@ public class GoalListActivity extends AppCompatActivity {
                 for (DataSnapshot snapshotNode: dataSnapshot.getChildren()) {
                     userGoals.add(snapshotNode.getValue(Goal.class));
                 }
+                progressBar3.setVisibility(View.GONE);
                 updateUI();
             }
 
