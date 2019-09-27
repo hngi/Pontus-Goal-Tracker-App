@@ -7,7 +7,7 @@
         android:id="@+id/confirm"
         android:icon="@drawable/ic_check_solid"
         android:orderInCategory="100"
-        android:title="@string/confirm"
+        android:title="confirm"
         app:showAsAction="always" />
 
 </menu>

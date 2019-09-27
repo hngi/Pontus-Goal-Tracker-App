@@ -108,6 +108,12 @@ public class Goal {
         return deadline;
     }
 
+//    public UUID getGoalId() {
+//        return goalId;
+//    }
+    public String getGoalIdString() {
+        return goalId.toString();
+    }
 
     public boolean isCompleted() {
         return isCompleted;

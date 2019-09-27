@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/add_new_goal"
+        android:text="add_new_goal"
         android:textColor="@android:color/white"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -41,7 +41,7 @@
         app:layout_constraintGuide_percent="0.15" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/goal_title_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -51,8 +51,11 @@
         android:drawableStart="@drawable/ic_list_solid"
         android:drawablePadding="20dp"
         android:ems="10"
+
         android:hint="@string/goal_detail"
         android:inputType="text"
+
+
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,14 +71,15 @@
         android:drawableStart="@drawable/ic_calendar_alt_regular"
         android:drawablePadding="20dp"
         android:ems="10"
+
         android:focusable="false"
         android:hint="@string/choose_date"
         android:inputType="date"
         android:longClickable="false"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintEnd_toEndOf="@+id/goal_title_edit"
+        app:layout_constraintStart_toStartOf="@+id/goal_title_edit"
+        app:layout_constraintTop_toBottomOf="@+id/goal_title_edit" />
 
     <Spinner
         android:id="@+id/goal_type"
@@ -107,7 +111,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/new_task_btn"
-        android:text="@string/add_task"
+        android:text="add_task"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/goal_type"
