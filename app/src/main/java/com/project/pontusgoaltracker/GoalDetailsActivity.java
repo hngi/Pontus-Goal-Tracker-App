@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+
 public class GoalDetailsActivity extends AppCompatActivity {
 
     @Override
@@ -21,6 +22,7 @@ public class GoalDetailsActivity extends AppCompatActivity {
         CheckBox checkbox2 = findViewById(R.id.checkbox_2);
         TextView task3 = findViewById(R.id.task_3);
         CheckBox checkbox3 = findViewById(R.id.checkbox_3);
+
     }
 }
 
