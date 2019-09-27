@@ -1,9 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:orientation="vertical"
     tools:context=".GoalDetailsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Goal Title:"
+            android:textStyle="bold"
+            android:textColor="#7F3DE8"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/goaltitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is the goal title"
+            android:textSize="20sp"
+            android:layout_marginStart="15dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Goal Description:"
+            android:textStyle="bold"
+            android:textColor="#7F3DE8"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/goaldescription"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="The goal description should be here.lmnxjb kncskchknb jbx,n jadcb knakbxzj"
+            android:layout_marginStart="15dp"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="25dp">
+
+        <TextView
+            android:id="@+id/tasks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tasks:"
+            android:textStyle="bold"
+            android:textColor="#7F3DE8"
+            android:textSize="24sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:layout_marginStart="194dp"
+            android:layout_toRightOf="@+id/task_1" />
+
+        <TextView
+            android:id="@+id/task_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tasks"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="25dp"
+            android:text="Task One"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:layout_marginStart="192dp"
+            android:layout_toRightOf="@+id/task_2" />
+
+        <TextView
+            android:id="@+id/task_2"
+            android:layout_below="@+id/task_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Task Two"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="33dp"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="123dp"
+            android:layout_marginStart="180dp"
+            android:layout_toRightOf="@+id/task_3" />
+
+        <TextView
+            android:id="@+id/task_3"
+            android:layout_below="@+id/task_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Task Three"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="33dp"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
