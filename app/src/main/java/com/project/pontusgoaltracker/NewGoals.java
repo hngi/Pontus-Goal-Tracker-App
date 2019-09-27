@@ -177,6 +177,7 @@ public class NewGoals extends AppCompatActivity {
             }
         });
 
+        Dates = findViewById(R.id.date);
         // Creating a Date Picker Dialog
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override

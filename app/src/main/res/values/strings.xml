@@ -24,4 +24,9 @@
     <string name="confirm">confirm</string>
     <string name="add_task">Add task +</string>
     <string name="checkedtextview">CheckedTextView</string>
+    <string name="goal_name">Goal Name</string>
+    <string name="goal_type">Goal Type</string>
+    <string name="goal_date">Goal Date</string>
+    <string name="percent">%</string>
+    <string name="_100">100</string>
 </resources>

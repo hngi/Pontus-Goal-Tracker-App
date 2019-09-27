@@ -57,6 +57,7 @@ public class GoalListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_goal_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Goals List");
 
         userGoals = new ArrayList<>();
         goalRecyclerView = findViewById(R.id.goal_list_recycler);
