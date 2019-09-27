@@ -10,6 +10,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.FirebaseDatabase;
+import com.project.pontusgoaltracker.models.Goal;
+import com.project.pontusgoaltracker.models.GoalType;
+import com.project.pontusgoaltracker.models.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +36,8 @@ public class SignUp extends AppCompatActivity {
     EditText pass_word;
     ProgressBar progress_bar;
     FirebaseAuth firebaseAuth;
+    FirebaseDatabase mDatabase;
+
     Button btn;
 
     @Override
@@ -42,6 +48,7 @@ public class SignUp extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -106,6 +113,10 @@ public class SignUp extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progress_bar.setVisibility(View.GONE);
+
+
+                    User user = createUser(userName,email,firebaseAuth.getCurrentUser().getUid());
+                    DatabaseWriter.writeUserToDatabase(user);
                     Intent intent = new Intent(SignUp.this, SignIn.class);
                     startActivity(intent);
                 }else{
@@ -122,5 +133,17 @@ public class SignUp extends AppCompatActivity {
         });
 
     }
+
+
+
+    public User createUser(String username, String email, String uId){
+
+        User user= new User(username , email, uId);
+
+        return user;
+    }
+
+
+
 
 }
