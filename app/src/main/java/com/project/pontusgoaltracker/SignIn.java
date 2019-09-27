@@ -120,11 +120,15 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
                             //if login is successful
                             if (!task.isSuccessful()) {
+                                progressBar.setVisibility(View.GONE);
+
                                 Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             } else {
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(SignIn.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                 //Proceed to next activity
+                                Intent i = new Intent(SignIn.this, GoalListActivity.class);
+                                startActivity(i);
                             }
 
                         }
