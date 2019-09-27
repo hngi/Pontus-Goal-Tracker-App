@@ -31,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -42,7 +43,8 @@ public class GoalListActivity extends AppCompatActivity {
     FirebaseDatabase database;
 
     private RecyclerView goalRecyclerView;
-    TextView goalTitle ;
+    TextView goalTitle,goalDescription,deadline,percentageComplete,goalType ;
+
     private GoalAdapter mAdapter;
     List<Goal> userGoals ;
 
@@ -145,6 +147,9 @@ public class GoalListActivity extends AppCompatActivity {
         GoalHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.goal_list_item, parent, false));
             goalTitle= itemView.findViewById(R.id.goal_Title);
+            deadline=itemView.findViewById(R.id.deadline_date_tv);
+            percentageComplete= itemView.findViewById(R.id.percentage_tv);
+            goalType = itemView.findViewById(R.id.goat_type_tv);
             itemView.setOnClickListener(this);
         }
 
@@ -152,7 +157,21 @@ public class GoalListActivity extends AppCompatActivity {
 
         void bind(Goal goal) {
             this.goal = goal;
+            String formattedDate;
+            Calendar calendar = Calendar.getInstance();
+            if(goal.getDeadline()!=null){
+                calendar.setTime(goal.getDeadline());
+
+                formattedDate = calendar.get(Calendar.DAY_OF_MONTH )+"-"+
+                        calendar.get(Calendar.MONTH)+"-"+
+                    calendar.get(Calendar.YEAR );
+            }
+            else formattedDate="undated";
+
             goalTitle.setText(goal.getTitle());
+            deadline.setText(formattedDate);
+            goalType.setText(goal.getType());
+
 
         }
 
@@ -162,6 +181,8 @@ public class GoalListActivity extends AppCompatActivity {
                     .setAction("Action", null).show();
         }
     }
+
+
     @Override
     protected void onStart() {
         super.onStart();
