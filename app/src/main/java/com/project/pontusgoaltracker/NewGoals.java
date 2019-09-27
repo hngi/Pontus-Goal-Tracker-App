@@ -62,6 +62,7 @@ public class NewGoals extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_times_solid);
+        getSupportActionBar().setTitle(null);
 
 
         final EditText edittext = new EditText(this);
@@ -78,8 +79,7 @@ public class NewGoals extends AppCompatActivity {
        titleEdit =  findViewById(R.id.goal_title_edit);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, spinnerArray);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                this, R.layout.spinner_item, spinnerArray);
         Spinner goaltypes = findViewById(R.id.goal_type);
         goaltypes.setAdapter(adapter);
         myCalendar = Calendar.getInstance();

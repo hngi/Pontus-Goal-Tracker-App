@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Makes the activity visible for 5 seconds //
-        int Timeout = 5000;
+        int Timeout = 3000;
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
