@@ -1,5 +1,7 @@
 package com.project.pontusgoaltracker.models;
 
+import java.util.ArrayList;
+
 public abstract class GoalType{
 
 		//note : dont try to make objects from this class
@@ -8,16 +10,20 @@ public abstract class GoalType{
         //todo : let each Goal type have customisable properties like colour;
 
 
-		final static String NULL = null;
-        final static String GENERAL = "General";
-        final static String RELIGIOUS ="Religious";
-        final static String FINANCIAL = "Financial";
-        final static String HEALTH ="Health";
-        final static String RELATIONSHIP = "Relationship";
-        final static String FAMILY ="Family";
-        final static String OCCUPATIONAL = "Occupational";
-        final static String ACADEMIC ="Academic";
-        final static String PERSONAL ="Personal";
+		final public static String NULL = null;
+        final public static String GENERAL = "General";
+        final public static String RELIGIOUS ="Religious";
+        final public static String FINANCIAL = "Financial";
+        final public static String HEALTH ="Health";
+        final public static String RELATIONSHIP = "Relationship";
+        final public static String FAMILY ="Family";
+        final public static String OCCUPATIONAL = "Occupational";
+        final public static String ACADEMIC ="Academic";
+        final public static String PERSONAL ="Personal";
+
+        final public static String[] allGoalTypes={NULL, GENERAL,RELIGIOUS,FINANCIAL,HEALTH,
+        RELATIONSHIP,FAMILY,OCCUPATIONAL,ACADEMIC,PERSONAL};
+
 
 
 

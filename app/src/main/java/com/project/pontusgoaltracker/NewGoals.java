@@ -13,6 +13,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.project.pontusgoaltracker.models.Goal;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,9 +25,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class NewGoals extends AppCompatActivity {
-
+    EditText titleEdit;
     EditText Dates;
     Calendar myCalendar;
+
+    FirebaseAuth auth= FirebaseAuth.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseUser user = auth.getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +44,8 @@ public class NewGoals extends AppCompatActivity {
         spinnerArray.add("Goal Type");
         spinnerArray.add("General");
         spinnerArray.add("Religious");
+
+       titleEdit =  findViewById(R.id.goal_title_edit);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
@@ -86,6 +97,10 @@ public class NewGoals extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.confirm:
+                   Goal goal= new Goal(titleEdit.getText().toString() ) ;
+                   DatabaseWriter.writeGoalToUser(user,goal);
+                   finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

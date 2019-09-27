@@ -1,5 +1,7 @@
 package com.project.pontusgoaltracker.models;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User {
@@ -7,7 +9,8 @@ public class User {
     private String username;
     private String email;
     private String uId;
-    private List<String> userGoalsIds;
+    private HashMap<String,Goal> userGoals;
+    private ArrayList<String> userGoalsIds;
 
     //constructors
     //warning: do not delete this empty constructor
@@ -19,6 +22,8 @@ public class User {
         this.username = username;
         this.email = email;
         this.uId=uId;
+        this.userGoals = new HashMap<>();
+        userGoalsIds = new ArrayList<>();
     }
 
 
@@ -40,6 +45,15 @@ public class User {
     }
     public List<String> getUserGoalsIds(){
     	return userGoalsIds;
+    }
+
+    public HashMap<String,Goal> getUserGoals() {
+        return userGoals;
+    }
+
+    public void addGoal(Goal goal){
+        userGoals.put(goal.getGoalIdString(),goal);
+        userGoalsIds.add(goal.getGoalIdString());
     }
 
 }
