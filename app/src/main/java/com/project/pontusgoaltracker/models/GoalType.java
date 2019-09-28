@@ -10,7 +10,7 @@ public abstract class GoalType{
         //todo : let each Goal type have customisable properties like colour;
 
 
-		final public static String NULL = null;
+		final public static String NULL = "";
         final public static String GENERAL = "General";
         final public static String RELIGIOUS ="Religious";
         final public static String FINANCIAL = "Financial";
@@ -21,8 +21,8 @@ public abstract class GoalType{
         final public static String ACADEMIC ="Academic";
         final public static String PERSONAL ="Personal";
 
-        final public static String[] allGoalTypes={NULL, GENERAL,RELIGIOUS,FINANCIAL,HEALTH,
-        RELATIONSHIP,FAMILY,OCCUPATIONAL,ACADEMIC,PERSONAL};
+        final public static String[] allGoalTypes={GENERAL,RELIGIOUS,FINANCIAL,HEALTH,
+        RELATIONSHIP,FAMILY,OCCUPATIONAL,ACADEMIC,PERSONAL,NULL};
 
 
 

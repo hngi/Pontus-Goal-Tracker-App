@@ -39,7 +39,7 @@
 
 
             <TextView
-                android:id="@+id/naira"
+                android:id="@+id/goat_type_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -52,7 +52,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/goal_Title" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/deadline_date_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -69,11 +69,11 @@
                 android:layout_marginStart="1dp"
                 android:text="@string/percent"
                 android:textColor="@color/colorPrimary"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toTopOf="@+id/textView5" />
+                app:layout_constraintStart_toEndOf="@+id/percentage_tv"
+                app:layout_constraintTop_toTopOf="@+id/percentage_tv" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/percentage_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -81,8 +81,8 @@
                 android:text="@string/_100"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintStart_toStartOf="@+id/deadline_date_tv"
+                app:layout_constraintTop_toBottomOf="@+id/deadline_date_tv" />
 
             <ImageView
                 android:id="@+id/imageView2"

@@ -33,10 +33,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.project.pontusgoaltracker.models.Goal;
+import com.project.pontusgoaltracker.models.GoalType;
+import com.project.pontusgoaltracker.models.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,7 +51,10 @@ public class NewGoals extends AppCompatActivity {
     Calendar myCalendar;
 
 
-    EditText titleEdit;
+    EditText titleEdit,descriptionEditText;
+    Spinner goaltypes;
+    String goalType= GoalType.GENERAL;
+    ArrayList<String> taskItems;
 
 
     FirebaseAuth auth= FirebaseAuth.getInstance();
@@ -65,30 +71,32 @@ public class NewGoals extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
 
 
+        titleEdit =  findViewById(R.id.goal_title_edit);
+        descriptionEditText = findViewById(R.id.goal_description_edit);
         final EditText edittext = new EditText(this);
         edittext.setPaddingRelative(8, 8, 8, 8);
 
         //Array that holds names for the list
-        final ArrayList<String> items = new ArrayList<>();
+          taskItems = new ArrayList<>();
         //Populating the task Spinner
         List<String> spinnerArray = new ArrayList<String>();
-        spinnerArray.add("Goal Type");
-        spinnerArray.add("General");
-        spinnerArray.add("Religious");
 
-       titleEdit =  findViewById(R.id.goal_title_edit);
+        for(String types : GoalType.allGoalTypes){
+            spinnerArray.add(types);
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, R.layout.spinner_item, spinnerArray);
-        Spinner goaltypes = findViewById(R.id.goal_type);
+        goaltypes = findViewById(R.id.goal_type);
         goaltypes.setAdapter(adapter);
+
         myCalendar = Calendar.getInstance();
 
 
         final ListView list = findViewById(R.id.task);
 
         //Setting the adapter for list view
-        final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.task_menu, R.id.checkedTextView, items);
+        final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.task_menu, R.id.checkedTextView, taskItems);
         list.setAdapter(listAdapter);
 
         //First Alert Dialogue for FAB
@@ -101,7 +109,7 @@ public class NewGoals extends AppCompatActivity {
         alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String newTask = edittext.getText().toString();
-                items.add(newTask);
+                taskItems.add(newTask);
                 adapter.notifyDataSetChanged();
 
             }
@@ -133,6 +141,7 @@ public class NewGoals extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedItem = ((TextView) view).getText().toString();
+                goalType=selectedItem;
                 Toast.makeText(NewGoals.this, selectedItem, Toast.LENGTH_SHORT).show();
             }
         });
@@ -154,7 +163,7 @@ public class NewGoals extends AppCompatActivity {
                 alert2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
-                        items.remove(i);
+                        taskItems.remove(i);
                         adapter.notifyDataSetChanged();
                     }
                 });
@@ -220,8 +229,22 @@ public class NewGoals extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.confirm:
-                   Goal goal= new Goal(titleEdit.getText().toString() ) ;
+
+                String title =titleEdit.getText().toString();
+                String description = descriptionEditText.getText().toString();
+                Date deadline = myCalendar.getTime();
+
+                   Goal goal= new Goal(title,description,goaltypes.getSelectedItem().toString() ) ;
+                   goal.setDeadline(deadline);
+                    //save tasks
+                    //search through task items, and create task objects with each task string
+                    for(int x=0; x<taskItems.size();x++){
+                        String taskString= taskItems.get(x);
+                        goal.addTask(new Task(taskString));
+                    }
+
                    DatabaseWriter.writeGoalToUser(user,goal);
+
                    finish();
             default:
                 return super.onOptionsItemSelected(item);
