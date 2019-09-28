@@ -26,6 +26,9 @@ public class Goal {
     private boolean isCompleted;
     private String goalType;
     private ArrayList<Task> tasks;
+    private int completedTaskCount =0 ;
+
+
 
     //todo : add id to goal
     //todo : create setDeadline method
@@ -89,6 +92,10 @@ public class Goal {
         isCompleted = completed;
     }
 
+    public void setCompletedTaskCount(int completedTaskCount) {
+        this.completedTaskCount = completedTaskCount;
+    }
+
     public void setType(String type) {
         this.goalType = type;
     }
@@ -126,8 +133,13 @@ public class Goal {
         return goalId.toString();
     }
 
+
     public boolean isCompleted() {
         return isCompleted;
+    }
+
+    public int getCompletedTaskCount() {
+        return completedTaskCount;
     }
 
     public String getType() {
@@ -141,7 +153,21 @@ public class Goal {
     //append
 
     public void addTask(Task task){
+        if(task.isCompleted()){
+            completedTaskCount++;
+        }
         tasks.add(task);
+    }
+    public void deleteTask(Task task){
+        if(task.isCompleted()){
+            completedTaskCount--;
+        }
+        tasks.remove(task);
+    }
+    public double calculatePercentageComplete(){
+
+        double percentage =(completedTaskCount/tasks.size()) *100;
+        return percentage;
     }
 
 }
