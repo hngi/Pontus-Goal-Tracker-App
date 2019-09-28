@@ -9,6 +9,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,14 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mAuth = FirebaseAuth.getInstance();
+        //user = mAuth.getCurrentUser();
+        //if(user != null ){
+          //  Intent intent = new Intent(SignIn.this, GoalListActivity.class);
+            //startActivity(intent);
+        //}
 
         //Initialize all views by ID
-        mAuth = FirebaseAuth.getInstance();
         EmailET = findViewById(R.id.email);
         PwdET = findViewById(R.id.password);
         remember = findViewById(R.id.checkBox);
