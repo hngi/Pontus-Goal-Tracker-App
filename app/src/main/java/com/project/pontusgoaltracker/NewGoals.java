@@ -237,7 +237,7 @@ public class NewGoals extends AppCompatActivity {
                    Goal goal= new Goal(title,description,goaltypes.getSelectedItem().toString() ) ;
                    goal.setDeadline(deadline);
                     //save tasks
-                   //search through task items, and create task objects with each task string
+                    //search through task items, and create task objects with each task string
                     for(int x=0; x<taskItems.size();x++){
                         String taskString= taskItems.get(x);
                         goal.addTask(new Task(taskString));
