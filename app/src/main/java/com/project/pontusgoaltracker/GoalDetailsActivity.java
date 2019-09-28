@@ -2,17 +2,24 @@ package com.project.pontusgoaltracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.project.pontusgoaltracker.models.Goal;
+
 
 public class GoalDetailsActivity extends AppCompatActivity {
-
+    Intent intent;
+    Goal goal ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal_details);
+        intent = getIntent();
+       // intent.getExtras().
+
 
         TextView goalTitle = findViewById(R.id.goaltitle);
         TextView goalDescription = findViewById(R.id.goaldescription);
@@ -22,6 +29,16 @@ public class GoalDetailsActivity extends AppCompatActivity {
         CheckBox checkbox2 = findViewById(R.id.checkbox_2);
         TextView task3 = findViewById(R.id.task_3);
         CheckBox checkbox3 = findViewById(R.id.checkbox_3);
+
+    }
+
+    void buildGoalFromIntent(Goal goal){
+        goal = new Goal();
+//        goal.setTitle();
+//        goal.setType();
+//        goal.setDescription();
+//        goal.setDateCompleted();
+//        goal.setCompleted();
 
     }
 }

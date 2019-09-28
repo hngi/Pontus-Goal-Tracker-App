@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.pontusgoaltracker.models.Goal;
+import com.project.pontusgoaltracker.models.Task;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -37,6 +38,10 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 public class GoalListActivity extends AppCompatActivity {
+
+
+
+
     Context context = this;
     FirebaseUser user;
     FirebaseAuth mAuth;
@@ -177,8 +182,24 @@ public class GoalListActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+
+            Intent intent = new Intent(GoalListActivity.this,GoalDetailsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(Goal.GOAL_TITLE,goal.getTitle());
+            bundle.putString(Goal.GOAL_DESCRIPTION, goal.getDescription());
+            bundle.putString(Goal.GOAL_TYPE,goal.getType());
+            ArrayList<String> taskTitles = new ArrayList<>();
+
+            for(Task task : goal.getTasks()){
+                taskTitles.add(task.getTitle());
+            }
+            bundle.putStringArrayList(Goal.TASKS,taskTitles);
+            intent.putExtras(bundle);
+
             Snackbar.make(view, "snackbar: the goal detail activity would launch", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+
+            startActivity(intent);
         }
     }
 
