@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseAuth auth= FirebaseAuth.getInstance();
+    FirebaseUser  user = auth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +27,16 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                finish();
-                Intent intent = new Intent(MainActivity.this, SignIn.class);
+
+                Intent intent ;
+                if(user==null){
+                   intent = new Intent(MainActivity.this, SignIn.class);
+                }else intent = new Intent(MainActivity.this, GoalListActivity.class);
+
+
+
                 startActivity(intent);
+                finish();
             }
         }, Timeout);
     }
