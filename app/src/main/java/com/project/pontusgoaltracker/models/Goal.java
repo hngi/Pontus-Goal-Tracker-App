@@ -25,7 +25,7 @@ public class Goal {
     private Date dateCompleted;
     private boolean isCompleted;
     private String goalType;
-    private ArrayList<Task> tasks;
+    private ArrayList<Task> tasks =new ArrayList<Task>();
     private int completedTaskCount =0 ;
 
 
@@ -39,7 +39,10 @@ public class Goal {
     //constructors
     //warning : do not use this constructor. do not delete either .
     //No constructor sets the deadline of Goal.. explicitly call setDeadline after creating an object.
-    public Goal(){}
+    public Goal(){
+
+        this.tasks = new ArrayList<Task>();
+    }
 
     public Goal(String title){
         this.dateCreated = new Date();
@@ -135,6 +138,7 @@ public class Goal {
 
 
     public boolean isCompleted() {
+        if(calculatePercentageComplete()>=100)return true;
         return isCompleted;
     }
 
@@ -166,7 +170,9 @@ public class Goal {
     }
     public double calculatePercentageComplete(){
 
-        double percentage =(completedTaskCount/tasks.size()) *100;
+        double percentage  = 100;
+        //prevents divide by zero error in cases of empty task lists
+            if(tasks.size()>0){   percentage =(completedTaskCount/tasks.size()) *100;}
         return percentage;
     }
 
