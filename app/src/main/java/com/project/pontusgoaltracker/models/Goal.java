@@ -5,6 +5,17 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Goal {
+    //keys :do not delete
+    public static final String GOAL_TITLE="GOAL_TITLE";
+    public static final String GOAL_DESCRIPTION="GOAL_DESCRIPTION";
+    public static final String GOAL_TYPE="GOAL_TYPE";
+    public static final String IS_COMPLETED ="IS_COMPLETED";
+    public static final String DEADLINE="DEADLINE";
+    public static final String TASKS="TASKS";
+
+
+
+
 
     private UUID goalId ;
     private String title;
