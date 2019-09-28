@@ -177,6 +177,7 @@ public class GoalListActivity extends AppCompatActivity {
             goalTitle.setText(goal.getTitle());
             deadline.setText(formattedDate);
             goalType.setText(goal.getType());
+            percentageComplete.setText(goal.calculatePercentageComplete()+"");
 
 
         }
