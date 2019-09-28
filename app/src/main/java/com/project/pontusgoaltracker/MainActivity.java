@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Makes the activity visible for 5 seconds //
+        // Makes the activity visible for 3 seconds //
         int Timeout = 3000;
 
         Timer timer = new Timer();
