@@ -41,7 +41,7 @@ public class GoalListActivity extends AppCompatActivity {
 
 
 
-
+    static Goal clickedGoal;
     Context context = this;
     FirebaseUser user;
     FirebaseAuth mAuth;
@@ -51,6 +51,7 @@ public class GoalListActivity extends AppCompatActivity {
     TextView goalTitle,goalDescription,deadline,percentageComplete,goalType ;
 
     private GoalAdapter mAdapter;
+
     List<Goal> userGoals ;
 
 
@@ -182,19 +183,8 @@ public class GoalListActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-
+            clickedGoal = goal;
             Intent intent = new Intent(GoalListActivity.this,GoalDetailsActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString(Goal.GOAL_TITLE,goal.getTitle());
-            bundle.putString(Goal.GOAL_DESCRIPTION, goal.getDescription());
-            bundle.putString(Goal.GOAL_TYPE,goal.getType());
-            ArrayList<String> taskTitles = new ArrayList<>();
-
-            for(Task task : goal.getTasks()){
-                taskTitles.add(task.getTitle());
-            }
-            bundle.putStringArrayList(Goal.TASKS,taskTitles);
-            intent.putExtras(bundle);
 
             Snackbar.make(view, "snackbar: the goal detail activity would launch", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
