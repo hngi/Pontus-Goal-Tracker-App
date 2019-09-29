@@ -164,13 +164,8 @@ public class GoalListActivity extends AppCompatActivity {
         void bind(Goal goal) {
             this.goal = goal;
             String formattedDate;
-            Calendar calendar = Calendar.getInstance();
             if(goal.getDeadline()!=null){
-                calendar.setTime(goal.getDeadline());
-
-                formattedDate = calendar.get(Calendar.DAY_OF_MONTH )+"-"+
-                        calendar.get(Calendar.MONTH)+"-"+
-                    calendar.get(Calendar.YEAR );
+                formattedDate = (goal.getDeadline());
             }
             else formattedDate="undated";
 
