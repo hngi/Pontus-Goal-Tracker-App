@@ -46,12 +46,14 @@ public class GoalDetailsActivity extends AppCompatActivity {
     Intent intent;
     Goal goal ;
     EditText goalTitle ,goalDescription, dateTextView;
+    TextView check;
     Button deleteGoalButton;
     ImageView calendarImage;
     Spinner goalTypeSpinner;
     ListView taskListView;
     ArrayList<Boolean> checkedTasks;
     Calendar myCalendar;
+    CheckBox CheckBox1;
     ArrayList<String> taskItems;
 
 //    String goalType= GoalType.G
@@ -77,7 +79,7 @@ public class GoalDetailsActivity extends AppCompatActivity {
         goalDescription = findViewById(R.id.description_edit_text);
         goalTypeSpinner = findViewById(R.id.goal_type_spinner);
         dateTextView= findViewById(R.id.date_text_view);
-        calendarImage = findViewById(R.id.calendar_icon);
+        check = findViewById(R.id.check);
         taskListView = findViewById(R.id.task_list_view);
         taskListView.setOnTouchListener(new ListView.OnTouchListener() {
             @Override
@@ -108,13 +110,14 @@ public class GoalDetailsActivity extends AppCompatActivity {
         });
 
         fillGoalDetails();
+        goal.setTaskSize(taskItems.size());
     }
 
     void fillGoalDetails(){
         populateGoalTypeSpinner();
         goalTitle.setText(goal.getTitle());
         goalDescription.setText((goal.getDescription()));
-        dateTextView.setText("date here");
+        dateTextView.setText(goal.getDeadline());
         populateTaskList();
         populateDateTextView();
 
@@ -148,14 +151,15 @@ public class GoalDetailsActivity extends AppCompatActivity {
         //Array that holds tasks for the list
         taskItems = new ArrayList<>();
         for(Task task :goal.getTasks()){
-            taskItems.add(task.getTitle());
+                taskItems.add(task.getTitle());
         }
 
         //Setting the adapter for list view
         final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
                 this, R.layout.task_list_item,
-                R.id.checkedTextView,
+                R.id.checkbox,
                 taskItems);
+        CheckBox1 = findViewById(R.id.checkbox);
 
 
         taskListView.setAdapter(listAdapter);
@@ -284,7 +288,7 @@ public class GoalDetailsActivity extends AppCompatActivity {
 
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy";
+        String myFormat = "dd-MMMM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
         dateTextView.setText(sdf.format(myCalendar.getTime()));
     }
@@ -303,14 +307,28 @@ public class GoalDetailsActivity extends AppCompatActivity {
                 return true;
             case R.id.confirm:
 
-                String title =goalTitle.getText().toString();
+                String title = goalTitle.getText().toString();
                 String description = goalDescription.getText().toString();
-                Date deadline = myCalendar.getTime();
+                String deadline = dateTextView.getText().toString();
 
                 goal.setTitle(title);
                 goal.setDeadline(deadline);
                 goal.setDescription(description);
                 //save tasks
+                int count = 0;
+                taskItems.size();
+                int size = taskItems.size();
+                goal.setTaskSize(size);
+                for (int i = 0; i < taskListView.getChildCount(); i++) {
+                    View v = taskListView.getChildAt(i);
+                    if (v instanceof CheckBox) {
+                            if (((CheckBox) v).isChecked()){
+                                count ++;
+
+                            }
+                    }
+                }
+                goal.setCompletedTaskCount(count);
 
                 //empty previous tasks
                 goal.emptyTasks();
