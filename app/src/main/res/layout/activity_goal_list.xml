@@ -15,12 +15,15 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/white"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:subtitleTextColor="@color/colorPrimary"
-            app:titleTextColor="@color/colorPrimary"/>
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+<!--            android:background="@android:color/white"-->
 
-    </com.google.android.material.appbar.AppBarLayout>
+<!--            app:subtitleTextColor="@color/colorPrimary"-->
+<!--            app:titleTextColor="@color/colorPrimary"/>-->
+
+
+   </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_goal_list" />
 
@@ -30,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="#FFFFFF"
+        app:backgroundTint="#BDBDBD"
         app:rippleColor="#FFFFFF"
         app:srcCompat="@drawable/ic_plus_solid" />
 
