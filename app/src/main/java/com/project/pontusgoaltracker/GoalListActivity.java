@@ -185,10 +185,9 @@ public class GoalListActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             clickedGoal = goal;
-            Intent intent = new Intent(GoalListActivity.this,GoalDetailsActivity.class);
+            Intent intent = new Intent(GoalListActivity.this,NewGoals.class);
 
-            Snackbar.make(view, "snackbar: the goal detail activity would launch", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+
 
             startActivity(intent);
         }

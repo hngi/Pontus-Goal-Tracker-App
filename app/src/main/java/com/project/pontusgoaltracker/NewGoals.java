@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,8 +72,15 @@ public class NewGoals extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
 
 
+
+
+
         titleEdit =  findViewById(R.id.goal_title_edit);
         descriptionEditText = findViewById(R.id.goal_description_edit);
+
+
+        
+
         final EditText edittext = new EditText(this);
         edittext.setPaddingRelative(8, 8, 8, 8);
 
@@ -89,6 +97,9 @@ public class NewGoals extends AppCompatActivity {
                 this, R.layout.spinner_item, spinnerArray);
         goaltypes = findViewById(R.id.goal_type);
         goaltypes.setAdapter(adapter);
+
+
+
 
         myCalendar = Calendar.getInstance();
 
@@ -187,6 +198,8 @@ public class NewGoals extends AppCompatActivity {
         });
 
         Dates = findViewById(R.id.date);
+
+
         // Creating a Date Picker Dialog
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
