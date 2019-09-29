@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
                 Intent intent ;
-                if(user==null){
+                if(user==null) {
                    intent = new Intent(MainActivity.this, SignIn.class);
                 }else intent = new Intent(MainActivity.this, GoalListActivity.class);
 
