@@ -13,7 +13,8 @@
         <activity android:name=".TeamDetails" />
         <activity android:name=".NewGoals" />
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".GoalDetailsActivity" />
+        <activity android:name=".GoalDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".GoalListActivity"
             android:label="@string/title_activity_goal_list"

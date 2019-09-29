@@ -18,6 +18,7 @@ public class Goal {
 
 
     private UUID goalId ;
+    private String goalIdString;
     private String title;
     private String description;
     private Date dateCreated;
@@ -47,6 +48,7 @@ public class Goal {
     public Goal(String title){
         this.dateCreated = new Date();
         this.goalId = UUID.randomUUID();
+        this.goalIdString=goalId.toString();
         this.title = title;
         this.tasks = new ArrayList<Task>();
     }
@@ -54,6 +56,7 @@ public class Goal {
     public Goal(String title, String description) {
         this.dateCreated = new Date();
         this.goalId = UUID.randomUUID();
+        this.goalIdString=goalId.toString();
         this.title = title;
         this.description = description;
         this.goalType = GoalType.GENERAL;
@@ -63,6 +66,7 @@ public class Goal {
     public Goal(String title, String description, String type) {
         this.dateCreated = new Date();
         this.goalId = UUID.randomUUID();
+        this.goalIdString=goalId.toString();
         this.title = title;
         this.description = description;
         this.goalType = type;
@@ -72,6 +76,7 @@ public class Goal {
     public Goal(String title, String description, String type, ArrayList<Task> tasks) {
         this.dateCreated = new Date();
         this.goalId = UUID.randomUUID();
+        this.goalIdString=goalId.toString();
         this.title = title;
         this.description = description;
         this.goalType = type;
@@ -103,6 +108,14 @@ public class Goal {
         this.goalType = type;
     }
 
+    public void emptyTasks(){
+        tasks=new ArrayList<>();
+    }
+
+//    public void setGoalIdString(String goalIdString) {
+//        goalIdString = goalIdString;
+//    }
+
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
@@ -133,7 +146,7 @@ public class Goal {
 //        return goalId;
 //    }
     public String getGoalIdString() {
-        return goalId.toString();
+        return goalIdString;
     }
 
 
@@ -145,6 +158,8 @@ public class Goal {
     public int getCompletedTaskCount() {
         return completedTaskCount;
     }
+
+
 
     public String getType() {
         return goalType;
