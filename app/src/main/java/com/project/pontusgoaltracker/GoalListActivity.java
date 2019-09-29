@@ -225,7 +225,4 @@ public class GoalListActivity extends AppCompatActivity {
         }
     }
 
-
-
-
 }
