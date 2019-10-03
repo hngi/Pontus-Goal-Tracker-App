@@ -7,9 +7,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 import com.project.pontusgoaltracker.models.Goal;
 import com.project.pontusgoaltracker.models.GoalType;
@@ -28,6 +31,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.TimeUnit;
+
 public class SignUp extends AppCompatActivity {
     //declaring the variables
     TextView sign_in;
@@ -37,6 +42,8 @@ public class SignUp extends AppCompatActivity {
     ProgressBar progress_bar;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase mDatabase;
+
+    PhoneAuthProvider phoneAuthProvider;
 
     Button btn;
 
@@ -101,36 +108,39 @@ public class SignUp extends AppCompatActivity {
             return;
         }
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            email_up.setError("Please enter a valid email address");
-            email_up.requestFocus();
-            return;
-        }
-
-        progress_bar.setVisibility(View.VISIBLE);
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    progress_bar.setVisibility(View.GONE);
 
 
-                    User user = createUser(userName,email,firebaseAuth.getCurrentUser().getUid());
-                    DatabaseWriter.writeUserToDatabase(user);
-                    Intent intent = new Intent(SignUp.this, SignIn.class);
-                    startActivity(intent);
-                }else{
-                    //check if an email is being registered twice
-                    progress_bar.setVisibility(View.GONE);
-                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                        Toast.makeText(SignUp.this, "You are already registered", Toast.LENGTH_SHORT).show();
+        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            progress_bar.setVisibility(View.VISIBLE);
+
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        progress_bar.setVisibility(View.GONE);
+
+
+                        User user = createUser(userName, email, firebaseAuth.getCurrentUser().getUid());
+                        DatabaseWriter.writeUserToDatabase(user);
+                        Intent intent = new Intent(SignUp.this, SignIn.class);
+                        startActivity(intent);
                     } else {
-                        Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        //check if an email is being registered twice
+                        progress_bar.setVisibility(View.GONE);
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            Toast.makeText(SignUp.this, "You are already registered", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
 
-            }
-        });
+                }
+            });
+        }else if(Patterns.PHONE.matcher(email).matches()){
+            Intent intent = new Intent(SignUp.this, PhoneVerification.class);
+            intent.putExtra("phone", email);
+            startActivity(intent);
+        }
 
     }
 
