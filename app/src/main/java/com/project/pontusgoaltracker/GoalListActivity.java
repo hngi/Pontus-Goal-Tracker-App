@@ -52,7 +52,7 @@ public class GoalListActivity extends AppCompatActivity {
 
     private GoalAdapter mAdapter;
 
-    List<Goal> userGoals ;
+    ArrayList<Goal> userGoals ;
 
 
     @Override
@@ -125,9 +125,9 @@ public class GoalListActivity extends AppCompatActivity {
     }
 
     private class GoalAdapter extends RecyclerView.Adapter<GoalHolder> {
-        private List<Goal> goals;
+        private ArrayList<Goal> goals;
 
-         GoalAdapter(List<Goal> goals) {
+         GoalAdapter(ArrayList<Goal> goals) {
             this.goals = goals;
         }
 
@@ -196,7 +196,6 @@ public class GoalListActivity extends AppCompatActivity {
             Intent intent = new Intent(this , SignIn.class);
             startActivity(intent);
             finish();
-
         }
     }
     public boolean onCreateOptionsMenu(Menu menu) {

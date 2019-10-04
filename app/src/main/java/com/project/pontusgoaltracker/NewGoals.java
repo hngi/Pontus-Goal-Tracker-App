@@ -57,6 +57,7 @@ public class NewGoals extends AppCompatActivity {
     Spinner goaltypes;
     String goalType= GoalType.GENERAL;
     ArrayList<String> taskItems;
+    ArrayList<Boolean> completed;
 
 
     FirebaseAuth auth= FirebaseAuth.getInstance();
@@ -87,6 +88,7 @@ public class NewGoals extends AppCompatActivity {
 
         //Array that holds names for the list
           taskItems = new ArrayList<>();
+          completed = new ArrayList<>();
         //Populating the task Spinner
         List<String> spinnerArray = new ArrayList<String>();
 
@@ -121,6 +123,7 @@ public class NewGoals extends AppCompatActivity {
         alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String newTask = edittext.getText().toString();
+                completed.add(false);
                 taskItems.add(newTask);
                 adapter.notifyDataSetChanged();
 
@@ -174,7 +177,7 @@ public class NewGoals extends AppCompatActivity {
 
                 alert2.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
+                        completed.remove(i);
                         taskItems.remove(i);
                         adapter.notifyDataSetChanged();
                     }
@@ -255,6 +258,8 @@ public class NewGoals extends AppCompatActivity {
                     //search through task items, and create task objects with each task string
                     for(int x=0; x<taskItems.size();x++){
                         String taskString= taskItems.get(x);
+                        Boolean taskCompleted = completed.get(x);
+                        goal.addChecked(new Task(taskCompleted));
                         goal.addTask(new Task(taskString));
                     }
                 if (TextUtils.isEmpty(title)){
@@ -274,7 +279,7 @@ public class NewGoals extends AppCompatActivity {
                 }else{
                     DatabaseWriter.writeGoalToUser(user,goal);
                     finish();
-            }
+                }
 
 
             default:
