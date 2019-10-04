@@ -185,8 +185,7 @@ public class GoalListActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             clickedGoal = goal;
-            Intent intent = new Intent(GoalListActivity.this,NewGoals.class);
-
+            Intent intent = new Intent(GoalListActivity.this, GoalDetailsActivity.class);
 
 
             startActivity(intent);
