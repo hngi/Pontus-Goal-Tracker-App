@@ -9,6 +9,7 @@ public class User {
     private String username;
     private String email;
     private String uId;
+    String phone;
     private HashMap<String,Goal> userGoals;
     private ArrayList<String> userGoalsIds;
 
@@ -22,6 +23,13 @@ public class User {
         this.username = username;
         this.email = email;
         this.uId=uId;
+        this.userGoals = new HashMap<>();
+        userGoalsIds = new ArrayList<>();
+    }
+
+    public User(String phone, String uId){
+        this.uId = uId;
+        this.phone = phone;
         this.userGoals = new HashMap<>();
         userGoalsIds = new ArrayList<>();
     }

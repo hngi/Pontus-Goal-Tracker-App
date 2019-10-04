@@ -136,10 +136,6 @@ public class SignUp extends AppCompatActivity {
 
                 }
             });
-        }else if(Patterns.PHONE.matcher(email).matches()){
-            Intent intent = new Intent(SignUp.this, PhoneVerification.class);
-            intent.putExtra("phone", email);
-            startActivity(intent);
         }
 
     }
