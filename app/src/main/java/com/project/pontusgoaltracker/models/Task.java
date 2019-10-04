@@ -5,16 +5,24 @@ import java.util.UUID;
 
 public class Task{
 
-        private UUID taskId;
+
+
+    private UUID taskId;
         private String title;
         private String description;
-        private boolean isCompleted;
+        public boolean isCompleted;
         private Date reminderDate;
 
         //TODO : 
 
         //constructors
-
+        public Task(UUID taskId, String title, String description, boolean isCompleted, Date reminderDate) {
+            this.taskId = taskId;
+            this.title = title;
+            this.description = description;
+            this.isCompleted = isCompleted;
+            this.reminderDate = reminderDate;
+        }
         public Task(){
             taskId= UUID.randomUUID();
         }
@@ -23,6 +31,10 @@ public class Task{
             this.title = title;
 
         }
+    public Task(Boolean isCompleted) {
+        this.isCompleted=isCompleted;
+
+    }
 
         public Task(String title, String description) {
             taskId= UUID.randomUUID();
@@ -37,7 +49,9 @@ public class Task{
             this.reminderDate = reminderDate;
         }
 
-        //SETTERS
+
+
+    //SETTERS
 
         public void setTitle(String title) {
             this.title = title;
@@ -47,8 +61,8 @@ public class Task{
             this.description = description;
         }
 
-        public void setCompleted(boolean completed) {
-            isCompleted = completed;
+        public void setIsCompleted(boolean completed) {
+            this.isCompleted = completed;
         }
 
         public void setReminderDate(Date reminderDate) {
@@ -65,7 +79,7 @@ public class Task{
             return description;
         }
 
-        public boolean isCompleted() {
+        public boolean getIsCompleted() {
             return isCompleted;
         }
 

@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,21 +47,21 @@ public class GoalDetailsActivity extends AppCompatActivity {
     Intent intent;
     Goal goal ;
     EditText goalTitle ,goalDescription, dateTextView;
-    TextView check;
     Button deleteGoalButton;
     ImageView calendarImage;
     Spinner goalTypeSpinner;
     ListView taskListView;
-    ArrayList<Boolean> checkedTasks;
+    ArrayList<Boolean> checkedTasks = new ArrayList<>();
     Calendar myCalendar;
     CheckBox CheckBox1;
-    ArrayList<String> taskItems;
+    ArrayList<String> taskItems = new ArrayList<>();
 
 //    String goalType= GoalType.G
     FirebaseAuth auth= FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseUser user = auth.getCurrentUser();
     DatabaseReference goalPath  = database.getReference("users/"+user.getUid()+"/userGoals/"+GoalListActivity.clickedGoal.getGoalIdString());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,6 @@ public class GoalDetailsActivity extends AppCompatActivity {
         goalDescription = findViewById(R.id.description_edit_text);
         goalTypeSpinner = findViewById(R.id.goal_type_spinner);
         dateTextView= findViewById(R.id.date_text_view);
-        check = findViewById(R.id.check);
         taskListView = findViewById(R.id.task_list_view);
         taskListView.setOnTouchListener(new ListView.OnTouchListener() {
             @Override
@@ -102,6 +102,7 @@ public class GoalDetailsActivity extends AppCompatActivity {
                 return true;
             }
         });
+
         deleteGoalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,11 +148,15 @@ public class GoalDetailsActivity extends AppCompatActivity {
 
     }
 
-    void populateTaskList(){
+    public void populateTaskList(){
         //Array that holds tasks for the list
         taskItems = new ArrayList<>();
+        checkedTasks = new ArrayList<>();
         for(Task task :goal.getTasks()){
-                taskItems.add(task.getTitle());
+            taskItems.add(task.getTitle());
+        }
+        for(Task completed:goal.getCompleted()){
+            checkedTasks.add(completed.getIsCompleted());
         }
 
         //Setting the adapter for list view
@@ -159,10 +164,10 @@ public class GoalDetailsActivity extends AppCompatActivity {
                 this, R.layout.task_list_item,
                 R.id.checkbox,
                 taskItems);
-        CheckBox1 = findViewById(R.id.checkbox);
 
 
         taskListView.setAdapter(listAdapter);
+
         taskListView.setMinimumHeight(4);
 
         final EditText edittext = new EditText(this);
@@ -182,8 +187,8 @@ public class GoalDetailsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String newTask = edittext.getText().toString();
                 taskItems.add(newTask);
+                checkedTasks.add(false);
                 listAdapter.notifyDataSetChanged();
-
             }
         });
 
@@ -236,6 +241,8 @@ public class GoalDetailsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         taskItems.remove(i);
+                        checkedTasks.remove(i);
+                        checkedTasks.trimToSize();
                         listAdapter.notifyDataSetChanged();
                     }
                 });
@@ -293,7 +300,15 @@ public class GoalDetailsActivity extends AppCompatActivity {
         dateTextView.setText(sdf.format(myCalendar.getTime()));
     }
 
-@Override
+    @Override
+    protected void onStart() {
+        super.onStart();
+        for (int i = 0; i < taskItems.size(); i++) {
+            taskListView.setItemChecked(i, checkedTasks.get(i));
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.add_new, menu);
@@ -319,12 +334,15 @@ public class GoalDetailsActivity extends AppCompatActivity {
                 taskItems.size();
                 int size = taskItems.size();
                 goal.setTaskSize(size);
+                goal.emptyChecked();
                 for (int i = 0; i < taskListView.getChildCount(); i++) {
                     View v = taskListView.getChildAt(i);
-                    if (v instanceof CheckBox) {
-                            if (((CheckBox) v).isChecked()){
+                    if (v instanceof CheckedTextView) {
+                            if (((CheckedTextView) v).isChecked()){
                                 count ++;
-
+                                checkedTasks.add(i,true);
+                            }else{
+                                checkedTasks.add(i,false);
                             }
                     }
                 }
@@ -337,6 +355,11 @@ public class GoalDetailsActivity extends AppCompatActivity {
                     String taskString= taskItems.get(x);
                     goal.addTask(new Task(taskString));
                 }
+                for(int x=0; x<taskItems.size();x++){
+                    Boolean taskCompleted= checkedTasks.get(x);
+                    goal.addChecked(new Task(taskCompleted));
+                }
+
 
                 goalPath.setValue(goal);
 

@@ -1,5 +1,6 @@
 package com.project.pontusgoaltracker.models;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -24,9 +25,10 @@ public class Goal {
     private Date dateCreated;
     private String deadline;
     private Date dateCompleted;
-    private boolean isCompleted;
+    //private boolean isCompleted;
     private String goalType;
     private ArrayList<Task> tasks =new ArrayList<Task>();
+    private ArrayList<Task> completed = new ArrayList<>();
     private int completedTaskCount = 0;
     private int taskSize;
 
@@ -44,6 +46,7 @@ public class Goal {
     public Goal(){
 
         this.tasks = new ArrayList<Task>();
+        this.completed = new ArrayList<Task>();
     }
 
     public Goal(String title){
@@ -52,6 +55,7 @@ public class Goal {
         this.goalIdString=goalId.toString();
         this.title = title;
         this.tasks = new ArrayList<Task>();
+        this.completed = new ArrayList<Task>();
     }
 
     public Goal(String title, String description) {
@@ -62,6 +66,7 @@ public class Goal {
         this.description = description;
         this.goalType = GoalType.GENERAL;
         this.tasks = new ArrayList<Task>();
+        this.completed = new ArrayList<Task>();
     }
 
     public Goal(String title, String description, String type) {
@@ -72,9 +77,10 @@ public class Goal {
         this.description = description;
         this.goalType = type;
         this.tasks = new ArrayList<Task>();
+        this.completed = new ArrayList<Task>();
     }
 
-    public Goal(String title, String description, String type, ArrayList<Task> tasks) {
+    public Goal(String title, String description, String type, ArrayList<Task> tasks, ArrayList<Task> completed) {
         this.dateCreated = new Date();
         this.goalId = UUID.randomUUID();
         this.goalIdString=goalId.toString();
@@ -82,6 +88,7 @@ public class Goal {
         this.description = description;
         this.goalType = type;
         this.tasks = tasks;
+        this.completed = completed;
     }
 
     //setters
@@ -97,9 +104,9 @@ public class Goal {
         this.dateCompleted = dateCompleted;
     }
 
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
+    /*public void setCompleted(boolean completed) {
+        this.isCompleted = completed;
+    }*/
 
     public void setCompletedTaskCount(int completedTaskCount) {
         this.completedTaskCount = completedTaskCount;
@@ -114,6 +121,9 @@ public class Goal {
 
     public void emptyTasks(){
         tasks=new ArrayList<>();
+    }
+    public void emptyChecked(){
+        completed=new ArrayList<>();
     }
 
 //    public void setGoalIdString(String goalIdString) {
@@ -154,10 +164,10 @@ public class Goal {
     }
 
 
-    public boolean isCompleted() {
+    /*public boolean isCompleted() {
         if(calculatePercentageComplete()>=100)return true;
         return isCompleted;
-    }
+    }*/
 
     public int getCompletedTaskCount() {
         return completedTaskCount;
@@ -175,26 +185,30 @@ public class Goal {
     public ArrayList<Task> getTasks() {
         return tasks;
     }
+    public ArrayList<Task> getCompleted() {
+        return completed;
+    }
 
     //append
 
     public void addTask(Task task){
-        if(task.isCompleted()){
-            completedTaskCount++;
-        }
+
         tasks.add(task);
     }
+    public void addChecked(Task task){
+        completed.add(task);
+    }
     public void deleteTask(Task task){
-        if(task.isCompleted()){
-            completedTaskCount--;
-        }
+
         tasks.remove(task);
     }
     public double calculatePercentageComplete(){
 
         double percentage  = 0.00;
         //prevents divide by zero error in cases of empty task lists
-            if(taskSize>0){ percentage =(Double.valueOf(completedTaskCount)/Double.valueOf(taskSize)*100);
+            if(taskSize>0){ Double percentage_n =(Double.valueOf(completedTaskCount)/Double.valueOf(taskSize)*100);
+                DecimalFormat df = new DecimalFormat("#.##");
+                percentage = Double.valueOf(df.format(percentage_n));
             }
         return percentage;
     }
