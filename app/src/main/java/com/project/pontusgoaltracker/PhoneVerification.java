@@ -61,8 +61,13 @@ public class PhoneVerification extends AppCompatActivity {
             public void onClick(View v)
             {
                 progressBar.setVisibility(View.VISIBLE);
-                verifyPhone();
-                progressBar.setVisibility(View.GONE);
+                if(mAuth.getCurrentUser() != null){
+                    Intent intent = new Intent(PhoneVerification.this, GoalListActivity.class);
+                    startActivity(intent);
+                }else {
+                    verifyPhone();
+                    progressBar.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -104,8 +109,7 @@ public class PhoneVerification extends AppCompatActivity {
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
-            User user = createUser(phoneNumber, mAuth.getCurrentUser().getUid());
-            DatabaseWriter.writeUserToDatabase(user);
+
 
             Toast.makeText(PhoneVerification.this, "Verification code sent", Toast.LENGTH_SHORT).show();
 
@@ -132,9 +136,6 @@ public class PhoneVerification extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             progressBar.setVisibility(View.GONE);
-                            ref = FirebaseDatabase.getInstance().getReference().child("phone");
-
-                            ref.child(phoneNumber).setValue(phoneNumber);
 
                             Intent intent = new Intent(PhoneVerification.this, GoalListActivity.class);
                             startActivity(intent);
@@ -149,8 +150,5 @@ public class PhoneVerification extends AppCompatActivity {
                 });
     }
 
-    public User createUser(String phoneNum, String UId){
-        User user = new User(phoneNum, UId);
-        return user;
-    }
+
 }

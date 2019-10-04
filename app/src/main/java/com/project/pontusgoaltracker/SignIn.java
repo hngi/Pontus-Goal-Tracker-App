@@ -127,31 +127,37 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                     //if they are not empty, Login
                 } else if (!(TextUtils.isEmpty(LoginEmail) && TextUtils.isEmpty(LoginPassword))) {
 
-                    progressBar.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.VISIBLE);
 
-                    mAuth.signInWithEmailAndPassword(LoginEmail, LoginPassword).addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+                        mAuth.signInWithEmailAndPassword(LoginEmail, LoginPassword).addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            //if login is successful
-                            if (!task.isSuccessful()) {
-                                progressBar.setVisibility(View.GONE);
+                                //if login is successful
+                                if (!task.isSuccessful()) {
+                                    progressBar.setVisibility(View.GONE);
 
-                                Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            } else {
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(SignIn.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                //Proceed to next activity
-                                Intent i = new Intent(SignIn.this, GoalListActivity.class);
-                                startActivity(i);
+                                    Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+
+                                    //Proceed to next activity
+                                    if (mAuth.getCurrentUser().isEmailVerified()) {
+                                        Toast.makeText(SignIn.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(SignIn.this, GoalListActivity.class);
+                                        startActivity(i);
+                                    }else {
+                                        Toast.makeText(SignIn.this, "Verify email", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
                             }
+                        });
 
-                        }
-                    });
 
+                }else{
+                    Toast.makeText(SignIn.this, "Please verify your email", Toast.LENGTH_SHORT).show();
                 }
-            }else if(Patterns.PHONE.matcher(LoginEmail).matches()){
-
             }
                 else {
                     Toast.makeText(SignIn.this, "Error Occured!! ", Toast.LENGTH_SHORT).show();
