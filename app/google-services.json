@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "861935764140-lov8t6rrcmhiajrrjjvtrsh0prfqv8up.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.pontusgoaltracker",
+            "certificate_hash": "5f7dff932c8f1031ace48ae076338ebbd2c3bcf0"
+          }
+        },
+        {
           "client_id": "861935764140-epitr0v9hvoiodsvm5ouedgs18g3ilqf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

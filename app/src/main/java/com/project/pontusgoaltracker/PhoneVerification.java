@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,12 +45,28 @@ public class PhoneVerification extends AppCompatActivity {
         mobile_no = getIntent().getStringExtra("phone");
         sendVerification(mobile_no);
 
-     //   otpBtn.setOnClickListener(new View.OnClickListener() {
-      //      @Override
-        //    public void onClick(View v) {
-         //       signInOtp(credential);
-         //   }
-      //  });
+        otpBtn.setOnClickListener(new View.OnClickListener() {
+
+            String code = otp.getText().toString().trim();
+
+            @Override
+            public void onClick(View v) {
+                if (code.isEmpty()) {
+
+                    otp.setError("Enter Code Please");
+                    otp.requestFocus();
+                    return;
+                }
+                verifyCode(code);
+            }
+        });
+
+    }
+
+    private void verifyCode(String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mCode, code);
+        signInOtp(credential);
+
 
     }
 
@@ -59,44 +76,54 @@ public class PhoneVerification extends AppCompatActivity {
                 mobile_no,
                 60,
                 TimeUnit.SECONDS,
-                this,
-                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                        mCode = phoneAuthCredential.getSmsCode();
-                      //  progressBar.setVisibility(View.GONE);
-                      //  Toast.makeText(PhoneVerification.this, "User has been successfully registered", Toast.LENGTH_SHORT).show();
-                     //   credential = phoneAuthCredential;
-                        signInOtp(phoneAuthCredential);
-                    }
+                TaskExecutors.MAIN_THREAD, mCallback
 
-                    @Override
-                    public void onVerificationFailed(@NonNull FirebaseException e) {
-
-                        Toast.makeText(PhoneVerification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
         );
     }
 
-    private void signInOtp(PhoneAuthCredential credential){
-        String get_otp = otp.getText().toString();
-        if(get_otp.equals(mCode)){
-            mAuth.signInWithCredential(credential).addOnCompleteListener(PhoneVerification.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        progressBar.setVisibility(View.GONE);
-                        Intent intent = new Intent(PhoneVerification.this, GoalListActivity.class);
-                        startActivity(intent);
-                    }else{
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(PhoneVerification.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        @Override
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+
+            mCode = s;
         }
+
+        @Override
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+            String code = phoneAuthCredential.getSmsCode();
+            //  progressBar.setVisibility(View.GONE);
+            //  Toast.makeText(PhoneVerification.this, "User has been successfully registered", Toast.LENGTH_SHORT).show();
+            //   credential = phoneAuthCredential;
+            if (code != null) {
+                verifyCode(code);
+            }
+        }
+
+        @Override
+        public void onVerificationFailed(@NonNull FirebaseException e) {
+
+            Toast.makeText(PhoneVerification.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+    };
+
+    private void signInOtp(PhoneAuthCredential credential) {
+
+        mAuth.signInWithCredential(credential).addOnCompleteListener(PhoneVerification.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
+                    Intent intent = new Intent(PhoneVerification.this, GoalListActivity.class);
+                    startActivity(intent);
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(PhoneVerification.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
 
