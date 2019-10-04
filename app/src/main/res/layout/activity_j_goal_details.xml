@@ -1,153 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <ScrollView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:minHeight="?attr/actionBarSize"
+
             android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/goal_type_spinner"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/title_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+        <Button
+            android:id="@+id/delete_goal_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/new_task_btn"
+            android:minHeight="24dip"
+            android:text="Delete Goal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
-                <Spinner
-                    android:id="@+id/goal_type_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4" />
 
-                <Button
-                    android:id="@+id/delete_goal_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/new_task_btn"
-                    android:minHeight="24dip"
-                    android:text="Delete Goal" />
+        <EditText
+            android:id="@+id/title_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Goal Title"
+            android:inputType="textPersonName"
+            android:paddingStart="8dp"
+            android:paddingBottom="18dp"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/delete_goal_button" />
 
-            </LinearLayout>
 
-            <EditText
-                android:id="@+id/title_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Goal Title"
-                android:inputType="textPersonName"
-                android:paddingBottom="18dp"
-                android:paddingStart="8dp"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+    <EditText
+        android:id="@+id/description_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:paddingBottom="18dp"
+        android:text="“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”"
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_edit_text" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/description_edit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:inputType="textMultiLine"
-                    android:paddingBottom="18dp"
-                    android:text="“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”"
-                    android:textAlignment="center" />
+        <EditText
+            android:id="@+id/date_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+            android:drawableTint="@color/colorPrimary"
+            android:editable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:inputType="date"
+            android:longClickable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_edit_text" />
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+        <Button
+            android:id="@+id/add_task_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/new_task_btn"
+            android:minWidth="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="add "
+            app:layout_constraintEnd_toEndOf="@+id/description_edit_text"
+            app:layout_constraintTop_toTopOf="@+id/textView3" />
 
-                <EditText
-                    android:id="@+id/date_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:ems="10"
-                    android:inputType="date" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="24dp"
+            android:text="@string/tasks"
+            android:textColor="#673AB7"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/description_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/date_text_view" />
 
-                <ImageView
-                    android:id="@+id/calendar_icon"
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#57673AB7"
-                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
-            </LinearLayout>
+    <ListView
+        android:id="@+id/task_list_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/add_task_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/add_task_button" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
+    <TextView
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="check"
+        app:layout_constraintEnd_toStartOf="@+id/delete_goal_button"
+        app:layout_constraintTop_toTopOf="@+id/delete_goal_button" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/add_task_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/new_task_btn"
-                        android:minWidth="20dp"
-                        android:text="add " />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:paddingStart="24dp"
-                        android:text="@string/tasks"
-                        android:textColor="#673AB7"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <ListView
-                    android:id="@+id/task_list_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="221dp"
-                    android:layout_marginTop="16dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

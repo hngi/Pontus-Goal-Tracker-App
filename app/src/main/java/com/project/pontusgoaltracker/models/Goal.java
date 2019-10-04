@@ -22,12 +22,13 @@ public class Goal {
     private String title;
     private String description;
     private Date dateCreated;
-    private Date deadline;
+    private String deadline;
     private Date dateCompleted;
     private boolean isCompleted;
     private String goalType;
     private ArrayList<Task> tasks =new ArrayList<Task>();
-    private int completedTaskCount =0 ;
+    private int completedTaskCount = 0;
+    private int taskSize;
 
 
 
@@ -103,6 +104,9 @@ public class Goal {
     public void setCompletedTaskCount(int completedTaskCount) {
         this.completedTaskCount = completedTaskCount;
     }
+    public void setTaskSize(int taskSize) {
+        this.taskSize = taskSize;
+    }
 
     public void setType(String type) {
         this.goalType = type;
@@ -116,7 +120,7 @@ public class Goal {
 //        goalIdString = goalIdString;
 //    }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
 
@@ -138,7 +142,7 @@ public class Goal {
         return dateCompleted;
     }
 
-    public Date getDeadline() {
+    public String getDeadline() {
         return deadline;
     }
 
@@ -157,6 +161,9 @@ public class Goal {
 
     public int getCompletedTaskCount() {
         return completedTaskCount;
+    }
+    public int getTaskSize() {
+        return taskSize;
     }
 
 
@@ -185,9 +192,10 @@ public class Goal {
     }
     public double calculatePercentageComplete(){
 
-        double percentage  = 100;
+        double percentage  = 0.00;
         //prevents divide by zero error in cases of empty task lists
-            if(tasks.size()>0){   percentage =(completedTaskCount/tasks.size()) *100;}
+            if(taskSize>0){ percentage =(Double.valueOf(completedTaskCount)/Double.valueOf(taskSize)*100);
+            }
         return percentage;
     }
 

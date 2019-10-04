@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -222,7 +223,7 @@ public class NewGoals extends AppCompatActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy";
+        String myFormat = "dd-MMMM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
         Dates.setText(sdf.format(myCalendar.getTime()));
     }
@@ -245,7 +246,8 @@ public class NewGoals extends AppCompatActivity {
 
                 String title =titleEdit.getText().toString();
                 String description = descriptionEditText.getText().toString();
-                Date deadline = myCalendar.getTime();
+                String deadline = Dates.getText().toString();
+
 
                    Goal goal= new Goal(title,description,goaltypes.getSelectedItem().toString() ) ;
                    goal.setDeadline(deadline);
@@ -255,10 +257,26 @@ public class NewGoals extends AppCompatActivity {
                         String taskString= taskItems.get(x);
                         goal.addTask(new Task(taskString));
                     }
+                if (TextUtils.isEmpty(title)){
+                    titleEdit.setError("Please Enter a Goal Title");
+                    Toast.makeText(NewGoals.this, "Enter a title", Toast.LENGTH_SHORT).show();
+                }
+                else if (TextUtils.isEmpty(description)){
+                    descriptionEditText.setError("Please Enter a Goal Description");
+                    Toast.makeText(NewGoals.this, "Enter a description", Toast.LENGTH_SHORT).show();
+                }
+                else if (TextUtils.isEmpty(deadline)){
+                    Dates.setError("Please Enter a Deadline date");
+                    Toast.makeText(NewGoals.this, "Enter a deadline date", Toast.LENGTH_SHORT).show();
+                }
+                else if (taskItems.size() == 0){
+                    Toast.makeText(NewGoals.this, "Input a task", Toast.LENGTH_SHORT).show();
+                }else{
+                    DatabaseWriter.writeGoalToUser(user,goal);
+                    finish();
+            }
 
-                   DatabaseWriter.writeGoalToUser(user,goal);
 
-                   finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

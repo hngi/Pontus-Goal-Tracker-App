@@ -7,9 +7,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +41,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     ImageView google, linked, facebook;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
+
     private FirebaseAuth.AuthStateListener mAuthListener;
     FirebaseUser user;
 
@@ -80,7 +84,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         linked.setOnClickListener(this);
         facebook.setOnClickListener(this);
 
-
         signUP = findViewById(R.id.signup);
         signUP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,26 +123,29 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
                     //if they are not empty, Login
                 } else if (!(TextUtils.isEmpty(LoginEmail) && TextUtils.isEmpty(LoginPassword))) {
+
                     progressBar.setVisibility(View.VISIBLE);
-                    mAuth.signInWithEmailAndPassword(LoginEmail, LoginPassword).addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            //if login is successful
-                            if (!task.isSuccessful()) {
-                                progressBar.setVisibility(View.GONE);
+                        mAuth.signInWithEmailAndPassword(LoginEmail, LoginPassword).addOnCompleteListener(SignIn.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            } else {
-                                progressBar.setVisibility(View.GONE);
-                                Toast.makeText(SignIn.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                //Proceed to next activity
-                                Intent i = new Intent(SignIn.this, GoalListActivity.class);
-                                startActivity(i);
+                                //if login is successful
+                                if (!task.isSuccessful()) {
+                                    progressBar.setVisibility(View.GONE);
+
+                                    Toast.makeText(SignIn.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(SignIn.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    //Proceed to next activity
+                                    Intent i = new Intent(SignIn.this, GoalListActivity.class);
+                                    startActivity(i);
+                                }
+
                             }
+                        });
 
-                        }
-                    });
                 } else {
                     Toast.makeText(SignIn.this, "Error Occured!! ", Toast.LENGTH_SHORT).show();
                 }
